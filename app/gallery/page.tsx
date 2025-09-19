@@ -38,6 +38,7 @@ export default function Gallery() {
     }
   ];
 
+
   const baseProducts = [
     {
       title: "Dental School Visits",

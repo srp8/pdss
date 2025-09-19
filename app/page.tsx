@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import CardNav from "@/components/CardNav";
 import SplitText from "@/components/SplitText";
 import { GridBackground } from "@/components/ui/grid-background";
@@ -41,6 +42,28 @@ export default function Home() {
       ]
     }
   ];
+
+  // Handle automatic scrolling on page load
+  useEffect(() => {
+    // Skip if not in browser environment
+    if (typeof window === 'undefined') return;
+
+    // Check if there's a hash in the URL (like /#featured-events)
+    if (window.location.hash) {
+      const elementId = window.location.hash.substring(1);
+      // Delay to ensure the page and all animations are loaded
+      setTimeout(() => {
+        const element = document.getElementById(elementId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest'
+          });
+        }
+      }, 1000); // Longer delay to ensure all page components are loaded
+    }
+  }, []);
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{background: 'radial-gradient(ellipse at center, #0C1B3A 40%, #030B14 100%)'}}>

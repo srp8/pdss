@@ -24,8 +24,8 @@ export default function About() {
       bgColor: "#0A1A2F",
       textColor: "#F5F5F5",
       links: [
-        { label: "Events", href: "/events", ariaLabel: "View upcoming events" },
-        { label: "Membership", href: "/membership", ariaLabel: "Join our society" },
+        { label: "Events", href: "/#featured-events", ariaLabel: "View upcoming events" },
+        { label: "Membership", href: "https://docs.google.com/forms/d/16upEDl75BlPAWFjcRNLe19IW7MoFhsMw3HyZe6JSuqo/viewform?edit_requested=true", ariaLabel: "Join our society" },
         { label: "Resources", href: "/resources", ariaLabel: "Access member resources" }
       ]
     },
@@ -38,6 +38,7 @@ export default function About() {
       ]
     }
   ];
+
 
   return (
     <div className="min-h-screen relative overflow-hidden" style={{background: 'radial-gradient(ellipse at center, #0C1B3A 40%, #030B14 100%)'}}>

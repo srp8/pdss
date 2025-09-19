@@ -154,6 +154,43 @@ const CardNav: React.FC<CardNavProps> = ({
     if (el) cardsRef.current[i] = el;
   };
 
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Skip handling if not in browser environment
+    if (typeof window === 'undefined') return;
+
+    // Skip handling for external links
+    if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+      return; // Let default behavior handle external links
+    }
+
+    // Handle Events link specifically for smooth scrolling
+    if (href === "/#featured-events") {
+      e.preventDefault();
+
+      // Close the menu first
+      if (isExpanded) {
+        toggleMenu();
+      }
+
+      // If we're on the homepage, scroll smoothly
+      if (window.location.pathname === '/') {
+        setTimeout(() => {
+          const element = document.getElementById('featured-events');
+          if (element) {
+            element.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+              inline: 'nearest'
+            });
+          }
+        }, 300); // Wait for menu to close
+      } else {
+        // If we're on another page, navigate to homepage with hash
+        window.location.href = '/#featured-events';
+      }
+    }
+  };
+
   return (
     <div
       className={`card-nav-container absolute left-1/2 -translate-x-1/2 w-[95%] max-w-[1000px] z-[99] top-[1.2em] md:top-[2em] ${className}`}
@@ -223,6 +260,7 @@ const CardNav: React.FC<CardNavProps> = ({
                     className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-colors duration-300 hover:text-[#b6233b] text-[15px] md:text-[16px]"
                     href={lnk.href}
                     aria-label={lnk.ariaLabel}
+                    onClick={(e) => handleLinkClick(e, lnk.href)}
                   >
                     <GoArrowUpRight className="nav-card-link-icon shrink-0" aria-hidden="true" />
                     {lnk.label}

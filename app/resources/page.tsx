@@ -40,6 +40,7 @@ export default function Resources() {
     }
   ];
 
+
   const timelineData = [
     {
       title: "Pre-Health Requirements",
